@@ -11,10 +11,8 @@ function sleep(seconds) {
 // Gets "Delete post" buttons on posts you've authored.
 function getDeleteButtons() {
     var buttons = [];
-    for (const h5 of document.querySelectorAll("h5.feed-shared-control-menu__headline")) {
-        if (h5.textContent.includes("Delete post")) {
-            buttons.push(h5);
-        }
+    for (const h5 of document.querySelectorAll("button.feed-shared-control-menu__trigger")) {
+        buttons.push(h5);  
     }
 
     return buttons;
@@ -22,7 +20,11 @@ function getDeleteButtons() {
 
 // Gets "Delete" button inside "Delete post?" confirmation box.
 function getDeleteConfirmationButton() {
-    return document.querySelector("button.feed-shared-decision-modal__confirm-button[data-control-name=\"deleteshares.delete\"]")
+    return document.querySelector("button.feed-components-shared-decision-modal__confirm-button")
+}
+
+function getModal() {
+    return document.querySelector(".feed-shared-control-menu__content artdeco-dropdown__content")
 }
 
 // Forces scroll down
@@ -33,7 +35,11 @@ function loadMoreActivity() {
 //
 async function deletePost(deleteButton) {
     deleteButton.click();
-    await sleep(2);
+    await sleep(1);
+    var modal = getModal();
+    await sleep(1);
+    
+    
 
     var deleteConfirmationButton = getDeleteConfirmationButton();
     if (deleteConfirmationButton) {
