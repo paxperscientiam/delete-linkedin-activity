@@ -23,8 +23,12 @@ function getDeleteConfirmationButton() {
     return document.querySelector("button.feed-components-shared-decision-modal__confirm-button")
 }
 
+function getModalDeleteButton() {
+    return document.querySelector("li.feed-shared-control-menu__item.option-delete div") 
+}
+
 function getModal() {
-    return document.querySelector(".feed-shared-control-menu__content artdeco-dropdown__content")
+    return document.querySelector(".feed-shared-control-menu__content")
 }
 
 // Forces scroll down
@@ -36,10 +40,14 @@ function loadMoreActivity() {
 async function deletePost(deleteButton) {
     deleteButton.click();
     await sleep(1);
-    var modal = getModal();
+    //var modal = getModal();
     await sleep(1);
     
+    var button = getModalDeleteButton()
     
+    if (button) {
+        button.click()   
+    }
 
     var deleteConfirmationButton = getDeleteConfirmationButton();
     if (deleteConfirmationButton) {
